@@ -22,7 +22,7 @@ npm install
 npm start
 ```
 
-## hot reload
+## Hot reload
 
 在项目目录下执行：
 
