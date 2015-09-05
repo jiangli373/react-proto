@@ -32,7 +32,7 @@ npm start
 webpack --progress --colors --watch
 ```
 
-运行后，再修改`javascript`文件，浏览器中打开的index.html将会自动更新。
+运行后，重新访问[http://localhost:3000/](http://localhost:3000/)，再修改`js`文件，浏览器中打开的index.html将会自动更新。
 
 ## 版本历史
 
