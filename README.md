@@ -10,7 +10,7 @@ git clone:
 git clone https://github.com/MarshalW/react-proto.git
 ```
 
-安装所依赖的包（前提是已经安装了nodejs）：
+安装所依赖的包（前提是已经安装了nodejs和[webpack](https://webpack.github.io/)）：
 
 ```
 npm install
