@@ -22,6 +22,16 @@ npm install
 npm start
 ```
 
+## hot reload
+
+在项目目录下执行：
+
+```
+webpack --progress --colors --watch
+```
+
+运行后，再修改`javascript`文件，浏览器中打开的index.html将会自动更新。
+
 ## 版本历史
 
 切换到历史版本，比如`m1`：
