@@ -22,6 +22,8 @@ npm install
 npm start
 ```
 
+通过浏览器访问：http://localhost:3000/
+
 ## Hot reload
 
 在项目目录下执行：
