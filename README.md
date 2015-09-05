@@ -22,7 +22,7 @@ npm install
 npm start
 ```
 
-通过浏览器访问：http://localhost:3000/
+通过浏览器访问：[http://localhost:3000/](http://localhost:3000/)
 
 ## Hot reload
 
