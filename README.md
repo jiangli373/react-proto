@@ -24,4 +24,11 @@ npm start
 
 ## 版本历史
 
+切换到历史版本，比如`m1`：
+
+```
+git checkout m1
+```
+
+* m1：[实现了基本的webpack+react+react hot loader](http://marshal.ohtly.com/2015/09/06/setting-up-webpack-for-react-and-hot-reload/)
 
