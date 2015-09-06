@@ -1,0 +1,65 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#root{
+	background-color: BlanchedAlmond;
+	height: 100%;
+	display: -webkit-flex;
+  	display: flex;
+  	flex-flow:column;
+}
+
+#topBar{
+	min-width: 800px;
+	background-color: PeachPuff;
+	height: 60px;
+	min-height: 60px;
+}
+
+#content{
+	flex:1;
+	display: -webkit-flex;
+  	display: flex;
+  	flex-flow:row;
+	background-color: PowderBlue;          
+  	min-height: 600px;
+}
+
+#bottomBar{
+	height: 50px;
+	min-height: 50px;
+	background-color: Silver;
+}
+
+#leftPannel{
+	min-width: 200px;
+	background-color: PaleGoldenRod;
+}
+
+#centerPannel{
+	min-width: 400px;
+	flex:1;
+	display: -webkit-flex;
+  	display: flex;
+	-webkit-align-items: center;
+    align-items: center;
+  	-webkit-justify-content: center;
+    justify-content: center;
+	background-color: Bisque;
+}
+
+#rightPannel{
+	min-width: 200px;
+	background-color: LightCyan;
+}
+
+#canvas{
+	height: 486px;
+	min-width: 486px;
+	width: 320px;
+	min-width: 320px;
+	background-color: Lavender;
+
+}
