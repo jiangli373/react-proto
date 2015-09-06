@@ -42,7 +42,7 @@ webpack --progress --colors --watch
 git checkout m1
 ```
 
-* m1：[实现了基本的webpack+react+react hot loader](http://marshal.ohtly.com/2015/09/06/setting-up-webpack-for-react-and-hot-load/)
-
+* m1: [实现了基本的webpack+react+react hot loader](http://marshal.ohtly.com/2015/09/06/setting-up-webpack-for-react-and-hot-load/)
 * m2: [webpack加载css及使用flexbox布局](http://marshal.ohtly.com/2015/09/06/loading-css-with-webpack-and-using-flexbox-layout/)
+* m2.1: [编写基本的React组件，替代布局的节点](http://marshal.ohtly.com/2015/09/06/write-basic-react-component/) 
 
