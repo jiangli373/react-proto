@@ -10,7 +10,7 @@ import CanvasPannel from './CanvasPannel';
 
 let routes=(
 	<Route name="app" path="/pageList/:magazineId" handler={App}>
-		<Route name="switchPage" path="page/:pageIndex" handler={CanvasPannel}/>
+		<Route name="switchPage" path="page/:pageId" handler={CanvasPannel}/>
 		<DefaultRoute handler={CanvasPannel}/>
   	</Route>
 );

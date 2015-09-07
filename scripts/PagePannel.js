@@ -37,7 +37,7 @@ class PageItem extends React.Component {
 		return ( 
 			< div className = "pageItem"
 				style = {style} >
-				<Link to="switchPage" params={{pageIndex:(this.props.number-1),magazineId:123}}>
+				<Link to="switchPage" params={{pageId:(this.props.number-1),magazineId:123}}>
 					第 {this.props.number} 页
 				</Link>
 			< /div>
