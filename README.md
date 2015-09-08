@@ -46,4 +46,5 @@ git checkout m1
 * m2: [webpack加载css及使用flexbox布局](http://marshal.ohtly.com/2015/09/06/loading-css-with-webpack-and-using-flexbox-layout/)
 * m2.1: [编写基本的React组件，替代布局的节点](http://marshal.ohtly.com/2015/09/06/write-basic-react-component/) 
 * m3: [使用React Router实现组件的路由](http://marshal.ohtly.com/2015/09/07/using-react-router/)
+* m4: [React通过AJAX加载数据](http://marshal.ohtly.com/2015/09/08/React-load-data-via-ajax/)
 
