@@ -3,60 +3,95 @@ import React from 'react';
 import Router from 'react-router';
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 import axios from 'axios';
+import _ from 'lodash';
+import PageStore from './PageStore';
 
-export default class PagePannel extends React.Component {
-	constructor(props) {
-		super(props);
-	    this.state = {
-	    	pageList:[]	
-	    };
-	};
-	componentDidMount(){
-		axios.get('/api/pageList.json').then(function(response){
-			this.setState({
-				pageList:response.data
-			});
-		}.bind(this)).catch(function(response){
-			console.log('error ajax!');
-		});
-	};
-	render() {
-		var pageIndex=0;
-		var pageItems=this.state.pageList.map(function(pageItem){
-			pageIndex++;
-			return (
-				<PageItem number={pageIndex} page={pageItem}/>
-			);
-		});
-		return ( 
-			< div id = "rightPannel" >
-				{pageItems}
-			</div>
-		);
-	}
-}
-
-class PageItem extends React.Component {
-	render() {
+var PageItem=React.createClass({
+	mixins: [ Router.State ],
+	handleClick:function(){
+		PageStore.clearPage();
+		PageStore.loadPage(this.props.pageItem.id);
+	},
+	render: function() {
 		let style = {
 			margin: '5px 5px 5px 5px',
 			width: '95%', // TODO 右空白边有问题才这么做的
 			height: '40px',
-			'min-height': '40px',
-			'background-color':'SpringGreen',
-			display: '-webkit-flex',
+			minHeight: '40px',
+			backgroundColor:'SpringGreen',
   			display: 'flex',
-			'-webkit-align-items': 'center',
- 		  	 'align-items': 'center'
+ 		  	alignItems: 'center'
 		};
+
+		var params={
+			pageId:this.props.pageItem.id,
+			magazineId:this.getParams().magazineId
+		};
+
 		return ( 
 			< div className = "pageItem"
 				style = {style} >
-				<span>{this.props.number}.</span>
-				<Link to="switchPage" params={{pageId:(this.props.number-1),magazineId:123}}>
-					{this.props.page.name}
+				<span>{this.props.pageIndex}.</span>
+				<Link to="switchPage" params={params} onClick={this.handleClick}>
+					{this.props.pageItem.name}
 				</Link>
 			< /div>
 		);
 	}
-}
+});
+
+var PagePannel=React.createClass({
+	mixins: [ Router.State ],
+	handleAddClick:function(){
+		PageStore.createPage();
+		PageStore.reload();
+	},
+	handleDeleteClick:function(){
+		console.log('delete pageItem');
+	},
+	getInitialState:function(){
+		return {pageList:[]};
+	},
+	componentDidMount:function(){
+		PageStore.on('pageListLoadded',function(){
+			this.setState({
+				pageList:PageStore.pageList
+			});
+		}.bind(this));
+		PageStore.loadPageList(this.getParams().magazineId);
+	},
+	render:function(){
+		var pageIndex=0;
+		var pageItems=this.state.pageList.map(function(pageItem){
+			pageIndex++;
+			return (
+				<PageItem key={pageItem.id} pageIndex={pageIndex} pageItem={pageItem}/>
+			);
+		});
+
+		var pageListStyle={
+			display: 'flex',
+  			flexFlow: 'column',
+  			flex:1
+		};
+
+		var buttonStyle={
+			width:'95%',
+			margin: '5px 5px 5px 5px',
+			height:'30px'
+		};
+
+		return ( 
+			< div id = "rightPannel" >
+				<div style={pageListStyle}>
+					{pageItems}
+				</div>
+				<button style={buttonStyle} onClick={this.handleAddClick}>添加</button>
+				<button style={buttonStyle} onClick={this.handleDeleteClick}>删除</button>
+			</div>
+		);
+	}
+});
+
+export default PagePannel;
+

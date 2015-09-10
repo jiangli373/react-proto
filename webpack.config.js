@@ -23,10 +23,10 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.jsx?$/,
-      loaders: ['react-hot', 'babel'],
-      include: path.join(__dirname, 'scripts')
-    }
+        test: /\.jsx?$/,
+        loaders: ['react-hot', 'babel'],
+        include: path.join(__dirname, 'scripts')
+      }
       // TODO 加入正确的css loader配置
     ]
   }

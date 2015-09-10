@@ -1,24 +1,51 @@
 'use strict';
 import React from 'react';
+import Router from 'react-router';
 import _ from 'lodash';
+import PageStore from './PageStore';
 
-export default class CanvasPannel extends React.Component {
-	componentWillMount(){
+var CanvasPannel=React.createClass({
+	mixins: [ Router.State ],
+	getInitialState:function(){
+		return {};
+	},
+	componentDidMount:function(){
+		PageStore.on('pageListLoadded',function(){
+			PageStore.loadPage(this.getParams().pageId);
+		}.bind(this));
+		PageStore.on('pageLoadded',function(){
+			this.setState({
+				page:PageStore.page
+			});
+		}.bind(this));
+	},
+	render:function(){
+		var pageId=this.props.params.pageId;
 
-	};
-	componentDidMount(){
-	};
-	render() {
-		var pageNo=1;
-
-		if(this.props.params.pageId){
-			pageNo=parseInt(this.props.params.pageId)+1;
+		if(!pageId){
+			pageId=PageStore.getFirstPageId();
 		}
 		
 		return (
 			<div id="centerPannel">
-				<div id="canvas">第 {{pageNo}} 页</div>
+				<Canvas />
 			</div>
 		);
 	}
-}
+});
+
+export default CanvasPannel;
+
+var Canvas=React.createClass({
+	render:function(){
+		if(!PageStore.page){
+			return (
+				<div id="canvas">Loading ..</div>
+			);
+		}else{
+			return (
+				<div id="canvas">{PageStore.page.name}</div>
+			);
+		}
+	}
+});	

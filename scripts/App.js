@@ -8,8 +8,9 @@ import CanvasPannel from './CanvasPannel';
 import Router from 'react-router';
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 
-export default class App extends React.Component {
-	render() {
+var App=React.createClass({
+	mixins: [ Router.State ],
+	render:function(){
 		return (
 			<div id="root">
 				<MenuBar></MenuBar>
@@ -22,4 +23,6 @@ export default class App extends React.Component {
 			</div>
 		);
 	}
-}
+});
+
+export default App;
