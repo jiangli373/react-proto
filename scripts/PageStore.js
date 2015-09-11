@@ -10,8 +10,8 @@ class PageStore extends EventEmitter {
 			switch(payload.eventName){
 				case 'loadPage':
 					console.log('load page ..');
-					PageStore.clearPage();
-					PageStore.loadPage(payload.pageId);
+					this.clearPage();
+					this.loadPage(payload.pageId);
 					console.log('load page .. ok');
 					break;
 				case 'createPage':
