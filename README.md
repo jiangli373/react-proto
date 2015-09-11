@@ -47,5 +47,5 @@ git checkout m1
 * m2.1: [编写基本的React组件，替代布局的节点](http://marshal.ohtly.com/2015/09/06/write-basic-react-component/) 
 * m3: [使用React Router实现组件的路由](http://marshal.ohtly.com/2015/09/07/using-react-router/)
 * m4: [React通过AJAX加载数据](http://marshal.ohtly.com/2015/09/08/React-load-data-via-ajax/)
-* m5: [使用Flux加载真实数据](http://marshal.ohtly.com/2015/09/10/use-flux-and-load-real-data/)
+* m5.2: [使用Flux加载真实数据](http://marshal.ohtly.com/2015/09/10/use-flux-and-load-real-data/)
 
