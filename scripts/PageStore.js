@@ -1,8 +1,27 @@
 import {EventEmitter} from 'events';
 import axios from 'axios';
 import _ from 'lodash';
+import AppDispatcher from './AppDispatcher';
 
 class PageStore extends EventEmitter {
+	constructor(){
+		super();
+		AppDispatcher.register(function(payload){
+			switch(payload.eventName){
+				case 'loadPage':
+					console.log('load page ..');
+					PageStore.clearPage();
+					PageStore.loadPage(payload.pageId);
+					console.log('load page .. ok');
+					break;
+				case 'createPage':
+					this.createPage();
+					this.reload();
+					break;
+			}
+			return true;
+		}.bind(this));
+	};
 	loadPageList(magazineId) {
 		this.magazineId=magazineId;
 		axios.get('/api/pageList/' + magazineId).then(function(response) {

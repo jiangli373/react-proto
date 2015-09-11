@@ -5,12 +5,18 @@ import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 import axios from 'axios';
 import _ from 'lodash';
 import PageStore from './PageStore';
+import AppDispatcher from './AppDispatcher';
 
 var PageItem=React.createClass({
 	mixins: [ Router.State ],
 	handleClick:function(){
-		PageStore.clearPage();
-		PageStore.loadPage(this.props.pageItem.id);
+		// TODO 这样调用时不卡的，不知道是否和hot－load有关
+		// PageStore.clearPage();
+		// PageStore.loadPage(this.props.pageItem.id);
+		AppDispatcher.dispatch({
+			eventName:'loadPage',
+			pageId:this.props.pageItem.id
+		});
 	},
 	render: function() {
 		let style = {
@@ -43,8 +49,11 @@ var PageItem=React.createClass({
 var PagePannel=React.createClass({
 	mixins: [ Router.State ],
 	handleAddClick:function(){
-		PageStore.createPage();
-		PageStore.reload();
+		// PageStore.createPage();
+		// PageStore.reload();
+		AppDispatcher.dispatch({
+			eventName:'createPage'
+		});
 	},
 	handleDeleteClick:function(){
 		console.log('delete pageItem');
