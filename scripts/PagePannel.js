@@ -57,7 +57,15 @@ var PagePannel=React.createClass({
 		});
 	},
 	handleDeleteClick:function(){
-		console.log('delete pageItem');
+		//TODO 默认未带pageId的url，应考虑做router redirect
+		var pageId=this.getParams().pageId; 
+
+		if(pageId){
+			AppDispatcher.dispatch({
+				eventName:'deletePage',
+				pageId:this.getParams().pageId
+			});
+		}
 	},
 	getInitialState:function(){
 		return {pageList:[]};

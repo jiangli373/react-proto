@@ -84,6 +84,18 @@ server.post('/api/page', function(req, res, next) {
 	return next();
 });
 
+// 删除页面
+server.del('/api/page/:id', function(req, res, next) {
+	_.remove(pageItems,function(pageItem){
+		return pageItem.id == parseInt(req.params.id);
+	});
+
+	res.send({
+		code:'deleteSuccess'
+	});
+	return next();
+});
+
 
 server.listen(3001, function() {
 	console.log('%s listening at %s', server.name, server.url);
