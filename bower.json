@@ -1,0 +1,20 @@
+{
+  "name": "react-proto",
+  "version": "0.0.1",
+  "authors": [
+    "Marshal <marshal.wu@qq.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap":"",
+    "jquery": "",
+    "jquery-ui":""
+  }
+}

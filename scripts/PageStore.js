@@ -32,6 +32,9 @@ class PageStore extends EventEmitter {
 		});
 	};
 	loadPage(pageId) {
+		if(!pageId){
+			pageId=this.getFirstPageId();
+		}
 		axios.get('/api/page/' + pageId).then(function(response) {
 			this.page = response.data.page;
 			this.emit('pageLoadded');

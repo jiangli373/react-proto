@@ -28,3 +28,4 @@ node_modules
 index.sublime-workspace
 build
 dist
+bower_components

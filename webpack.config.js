@@ -16,10 +16,10 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx']
+     extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [{

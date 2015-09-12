@@ -10,13 +10,17 @@ import AppDispatcher from './AppDispatcher';
 var PageItem=React.createClass({
 	mixins: [ Router.State ],
 	handleClick:function(){
-		// TODO 这样调用时不卡的，不知道是否和hot－load有关
-		// PageStore.clearPage();
-		// PageStore.loadPage(this.props.pageItem.id);
 		AppDispatcher.dispatch({
 			eventName:'loadPage',
 			pageId:this.props.pageItem.id
 		});
+
+		var params={
+			pageId:this.props.pageItem.id,
+			magazineId:this.getParams().magazineId
+		};
+
+		this.context.router.transitionTo('switchPage',params);
 	},
 	render: function() {
 		let style = {
@@ -29,18 +33,11 @@ var PageItem=React.createClass({
  		  	alignItems: 'center'
 		};
 
-		var params={
-			pageId:this.props.pageItem.id,
-			magazineId:this.getParams().magazineId
-		};
-
 		return ( 
 			< div className = "pageItem"
-				style = {style} >
+				style = {style} onClick={this.handleClick}>
 				<span>{this.props.pageIndex}.</span>
-				<Link to="switchPage" params={params} onClick={this.handleClick}>
-					{this.props.pageItem.name}
-				</Link>
+				<div>{this.props.pageItem.name}</div>
 			< /div>
 		);
 	}
@@ -49,8 +46,6 @@ var PageItem=React.createClass({
 var PagePannel=React.createClass({
 	mixins: [ Router.State ],
 	handleAddClick:function(){
-		// PageStore.createPage();
-		// PageStore.reload();
 		AppDispatcher.dispatch({
 			eventName:'createPage'
 		});
@@ -67,7 +62,13 @@ var PagePannel=React.createClass({
 				pageList:PageStore.pageList
 			});
 		}.bind(this));
-		PageStore.loadPageList(this.getParams().magazineId);
+		PageStore.loadPageList(this.getParams().magazineId);// TODO  改为dispatcher发事件通知
+
+		// $('#pageItemList').selectable({
+		// 	selected:function(){
+		// 		console.log('+++++++>>>>>selected');
+		// 	}
+		// });
 	},
 	render:function(){
 		var pageIndex=0;
@@ -92,7 +93,7 @@ var PagePannel=React.createClass({
 
 		return ( 
 			< div id = "rightPannel" >
-				<div style={pageListStyle}>
+				<div id="pageItemsList" style={pageListStyle}>
 					{pageItems}
 				</div>
 				<button style={buttonStyle} onClick={this.handleAddClick}>添加</button>

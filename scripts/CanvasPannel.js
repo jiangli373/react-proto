@@ -3,6 +3,7 @@ import React from 'react';
 import Router from 'react-router';
 import _ from 'lodash';
 import PageStore from './PageStore';
+import AppDispatcher from './AppDispatcher';
 
 var CanvasPannel=React.createClass({
 	mixins: [ Router.State ],
@@ -11,7 +12,10 @@ var CanvasPannel=React.createClass({
 	},
 	componentDidMount:function(){
 		PageStore.on('pageListLoadded',function(){
-			PageStore.loadPage(this.getParams().pageId);
+			AppDispatcher.dispatch({
+				eventName:'loadPage',
+				pageId:this.getParams().pageId
+			});
 		}.bind(this));
 		PageStore.on('pageLoadded',function(){
 			this.setState({
