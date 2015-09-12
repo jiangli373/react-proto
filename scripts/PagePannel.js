@@ -23,12 +23,18 @@ var PageItem=React.createClass({
 		this.context.router.transitionTo('switchPage',params);
 	},
 	render: function() {
+		let backgroundColor='SpringGreen';
+
+		if(this.props.pageItem.id==this.getParams().pageId){
+			backgroundColor='Turquoise'; 
+		}
+
 		let style = {
 			margin: '5px 5px 5px 5px',
 			width: '95%', // TODO 右空白边有问题才这么做的
 			height: '40px',
 			minHeight: '40px',
-			backgroundColor:'SpringGreen',
+			backgroundColor:backgroundColor,
   			display: 'flex',
  		  	alignItems: 'center'
 		};
@@ -63,12 +69,6 @@ var PagePannel=React.createClass({
 			});
 		}.bind(this));
 		PageStore.loadPageList(this.getParams().magazineId);// TODO  改为dispatcher发事件通知
-
-		// $('#pageItemList').selectable({
-		// 	selected:function(){
-		// 		console.log('+++++++>>>>>selected');
-		// 	}
-		// });
 	},
 	render:function(){
 		var pageIndex=0;
