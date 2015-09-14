@@ -1,9 +1,10 @@
 'use strict';
-import React from 'react';
+import React , { PropTypes } from 'react';
 import Router from 'react-router';
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 import axios from 'axios';
 import _ from 'lodash';
+import { DragSource } from 'react-dnd';
 import PageStore from './PageStore';
 import AppDispatcher from './AppDispatcher';
 
@@ -23,10 +24,10 @@ var PageItem=React.createClass({
 		this.context.router.transitionTo('switchPage',params);
 	},
 	render: function() {
-		let backgroundColor='SpringGreen';
+		let backgroundColor='Turquoise';
 
 		if(this.props.pageItem.id==this.getParams().pageId){
-			backgroundColor='Turquoise'; 
+			backgroundColor='SpringGreen'; 
 		}
 
 		let style = {
@@ -49,24 +50,8 @@ var PageItem=React.createClass({
 	}
 });
 
-var PagePannel=React.createClass({
-	mixins: [ Router.State ],
-	handleAddClick:function(){
-		AppDispatcher.dispatch({
-			eventName:'createPage'
-		});
-	},
-	handleDeleteClick:function(){
-		//TODO 默认未带pageId的url，应考虑做router redirect
-		var pageId=this.getParams().pageId; 
-
-		if(pageId){
-			AppDispatcher.dispatch({
-				eventName:'deletePage',
-				pageId:this.getParams().pageId
-			});
-		}
-	},
+var PageList=React.createClass({
+	mixins: [ Router.State],
 	getInitialState:function(){
 		return {pageList:[]};
 	},
@@ -76,7 +61,11 @@ var PagePannel=React.createClass({
 				pageList:PageStore.pageList
 			});
 		}.bind(this));
-		PageStore.loadPageList(this.getParams().magazineId);// TODO  改为dispatcher发事件通知
+
+		AppDispatcher.dispatch({
+			eventName:'loadPageList',
+			magazineId:this.getParams().magazineId
+		});
 	},
 	render:function(){
 		var pageIndex=0;
@@ -93,6 +82,33 @@ var PagePannel=React.createClass({
   			flex:1
 		};
 
+		return (
+			<div id="pageItemsList" style={pageListStyle}>
+				{pageItems}
+			</div>
+		);
+	}
+});
+
+var PagePannel=React.createClass({
+	mixins: [ Router.State],
+	handleAddClick:function(){
+		AppDispatcher.dispatch({
+			eventName:'createPage'
+		});
+	},
+	handleDeleteClick:function(){
+		//TODO 默认未带pageId的url，应考虑做router redirect
+		var pageId=this.getParams().pageId; 
+
+		if(pageId){
+			AppDispatcher.dispatch({
+				eventName:'deletePage',
+				pageId:this.getParams().pageId
+			});
+		}
+	},
+	render:function(){
 		var buttonStyle={
 			width:'95%',
 			margin: '5px 5px 5px 5px',
@@ -101,9 +117,7 @@ var PagePannel=React.createClass({
 
 		return ( 
 			< div id = "rightPannel" >
-				<div id="pageItemsList" style={pageListStyle}>
-					{pageItems}
-				</div>
+				<PageList></PageList>
 				<button style={buttonStyle} onClick={this.handleAddClick}>添加</button>
 				<button style={buttonStyle} onClick={this.handleDeleteClick}>删除</button>
 			</div>

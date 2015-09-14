@@ -1,6 +1,6 @@
 'use strict';
 
-import '!style!css!../css/style.css';
+import '../css/style.css';
 import React from 'react';
 import Router from 'react-router';
 import { DefaultRoute, Redirect, Link, Route, RouteHandler } from 'react-router';

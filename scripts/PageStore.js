@@ -11,7 +11,6 @@ class PageStore extends EventEmitter {
 				case 'loadPage':
 					this.clearPage();
 					this.loadPage(payload.pageId);
-					console.log('load page .. ok');
 					break;
 				case 'createPage':
 					this.createPage();
@@ -21,6 +20,9 @@ class PageStore extends EventEmitter {
 					this.deletePage(payload.pageId);
 					this.reload();
 					break;
+				case 'loadPageList':
+					this.loadPageList();
+					break;
 			}
 			return true;
 		}.bind(this));
@@ -29,6 +31,7 @@ class PageStore extends EventEmitter {
 		this.magazineId=magazineId;
 		axios.get('/api/pageList/' + magazineId).then(function(response) {
 			this.pageList = response.data.pageItems;
+			console.log('>>>load page list ok.');
 			this.emit('pageListLoadded');
 		}.bind(this)).catch(function(response) {
 			console.log('>>>load page list error! '); //TODO 整体解决错误处理
@@ -40,6 +43,7 @@ class PageStore extends EventEmitter {
 		}
 		axios.get('/api/page/' + pageId).then(function(response) {
 			this.page = response.data.page;
+			console.log('>>>load page ok.');
 			this.emit('pageLoadded');
 		}.bind(this)).catch(function(response) {
 			console.log('>>>load page error!'); //TODO 整体解决错误处理

@@ -26,6 +26,10 @@ module.exports = {
         test: /\.jsx?$/,
         loaders: ['react-hot', 'babel'],
         include: path.join(__dirname, 'scripts')
+      },
+      {
+        test:/\.css$/,
+        loader:'style!css'
       }
       // TODO 加入正确的css loader配置
     ]
